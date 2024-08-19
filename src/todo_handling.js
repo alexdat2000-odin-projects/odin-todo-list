@@ -1,4 +1,5 @@
 const uuidv4 = require("uuid/v4")
+import {StorageGet, StorageSet} from "./storage";
 
 
 const PRIORITIES = {
@@ -50,9 +51,18 @@ class TodoEntry {
 class TodoList {
     todos = [];
 
-    AddEnrty(title, description, priority, deadline, project, status) {
+    constructor() {
+        this.todos = StorageGet();
+    }
+
+    #UpdateStorage() {
+        StorageSet(this.todos);
+    }
+
+    AddEntry(title, description, priority, deadline, project, status) {
         this.todos.push(new TodoEntry(title, description, priority, deadline, project, status));
         this.todos.sort(TodoEntry.comp);
+        this.#UpdateStorage();
     }
 
     #GetIndexById(id) {
@@ -66,6 +76,7 @@ class TodoList {
             return;
         }
         this.todos[index].update(title, description, priority, deadline, project, status);
+        this.#UpdateStorage();
     }
 
     DeleteEntry(id) {
@@ -75,6 +86,7 @@ class TodoList {
             return;
         }
         this.todos.splice(index, 1);
+        this.#UpdateStorage();
     }
 
     FilterByProject(project) {
