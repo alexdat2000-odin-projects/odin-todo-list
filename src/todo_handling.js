@@ -40,6 +40,10 @@ class TodoEntry {
         }
         return rhs.priority - lhs.priority;
     }
+
+    isExpired() {
+        return this.deadline + (60 * 60 * 24 * 1000) < Date.now();
+    }
 }
 
 
@@ -74,16 +78,26 @@ class TodoList {
     }
 
     FilterByProject(project) {
-        return this.todos.filter((element) => project === null || element.project === project);
+        return this.todos.filter((entry) => (project === null || entry.project === project) && !entry.isExpired());
     }
 
     GetProjectList() {
         let projects = [];
         for (let entry of this.todos) {
-            projects.push(entry.project);
+            if (!entry.isExpired) {
+                projects.push(entry.project);
+            }
         }
         return [...new Set(projects)].toSorted();
     }
+
+    FilterByStatus(required_statuses) {
+        return this.todos.filter((entry) => required_statuses.includes(entry.status) && !entry.isExpired());
+    }
+
+    FilterExpired() {
+        return this.todos.filter((entry) => entry.isExpired());
+    }
 }
 
-export {PRIORITIES, TodoEntry, TodoList};
+export {PRIORITIES, STATUSES, TodoEntry, TodoList};
