@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'matemasieregular';
+    src: url('static/matemasie-regular-webfont.woff2') format('woff2'),
+    url('static/matemasie-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+
+    display: grid;
+    grid-template-areas:
+            "header header"
+            "sidebar main"
+            "footer footer";
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: 150px 1fr 50px;
+    overflow: hidden;
+}
+
+#header {
+    background: #af7eeb;
+    grid-area: header;
+
+    padding-left: 50px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+
+    font-family: "matemasieregular", sans-serif;
+    font-size: 75px;
+    font-weight: bold;
+    color: #e3e9ff;
+}
+
+#header>div {
+    margin-top: 8px;
+}
+
+#sidebar {
+    background: #e3e9ff;
+    grid-area: sidebar;
+}
+
+#main {
+    grid-area: main;
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-family: Roboto, sans-serif;
+    background: #af7eeb;
+    grid-area: footer;
+}
