@@ -1,62 +1,104 @@
 @font-face {
-    font-family: 'matemasieregular';
-    src: url('static/matemasie-regular-webfont.woff2') format('woff2'),
-    url('static/matemasie-regular-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'matemasieregular';
+  src: url('static/matemasie-regular-webfont.woff2') format('woff2'),
+  url('static/matemasie-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 
+:root {
+  --priority-color-high: #FA5252;
+  --priority-color-normal: #FCC419;
+  --priority-color-low: #94D82D;
+}
 
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
 
-    display: grid;
-    grid-template-areas:
+  display: grid;
+  grid-template-areas:
             "header header"
             "sidebar main"
             "footer footer";
-    grid-template-columns: 300px 1fr;
-    grid-template-rows: 150px 1fr 50px;
-    overflow: hidden;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: 100px 1fr 50px;
+  overflow: hidden;
 }
 
 #header {
-    background: #af7eeb;
-    grid-area: header;
+  background: #af7eeb;
+  grid-area: header;
 
-    padding-left: 50px;
-    display: flex;
-    gap: 25px;
-    align-items: center;
+  padding-left: 50px;
+  display: flex;
+  gap: 25px;
+  align-items: center;
 
-    font-family: "matemasieregular", sans-serif;
-    font-size: 75px;
-    font-weight: bold;
-    color: #e3e9ff;
+  font-family: "matemasieregular", sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #e3e9ff;
 }
 
-#header>div {
-    margin-top: 8px;
+#header > div {
+  margin-top: 10px;
 }
+
 
 #sidebar {
-    background: #e3e9ff;
-    grid-area: sidebar;
+  background: #e3e9ff;
+  grid-area: sidebar;
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px 20px 10px;
+
+  gap: 30px;
+  overflow-y: scroll;
+}
+
+#sidebar > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+#sidebar h1 {
+  margin: 0 0 5px 10px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding-inline: 20px;
+}
+
+#sidebar img {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+#sidebar span {
+  font-size: 25px;
 }
 
 #main {
-    grid-area: main;
+  grid-area: main;
 }
 
 #footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 18px;
-    font-family: Roboto, sans-serif;
-    background: #af7eeb;
-    grid-area: footer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  background: #af7eeb;
+  grid-area: footer;
 }
