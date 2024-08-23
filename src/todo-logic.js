@@ -143,15 +143,11 @@ class TodoList {
             && entry.status === STATUSES.NOT_COMPLETED);
     }
 
-    GetCountsByCategories() {
+    GetCountsByPriorities() {
         let ans = {
             low: 0,
             normal: 0,
             high: 0,
-            projects: {},
-        }
-        for (const project of this.projects) {
-            ans.projects[project] = 0;
         }
         for (const entry of this.todos) {
             if (entry.priority === PRIORITIES.LOW) {
@@ -161,11 +157,21 @@ class TodoList {
             } else if (entry.priority === PRIORITIES.HIGH) {
                 ans.high++;
             }
-            if (entry.project !== null) {
-                ans.projects[entry.project]++;
-            }
         }
         return ans;
+    }
+
+    GetCountsByProjects() {
+        let projects = {};
+        for (const project of this.projects) {
+            projects[project] = 0;
+        }
+        for (const entry of this.todos) {
+            if (entry.project !== null) {
+                projects[entry.project]++;
+            }
+        }
+        return projects;
     }
 }
 
