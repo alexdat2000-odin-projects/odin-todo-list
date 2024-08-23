@@ -44,6 +44,10 @@ class TodoEntry {
     isExpired() {
         return this.deadline + (60 * 60 * 24 * 1000) < Date.now();
     }
+
+    expiresIn() {
+        return Math.floor((this.deadline + (60 * 60 * 24 * 1000) - Date.now()) / (60 * 60 * 24 * 1000));
+    }
 }
 
 
@@ -122,16 +126,21 @@ class TodoList {
         return this.todos;
     }
 
+    FilterInProgress() {
+        return this.todos.filter((entry) => !entry.isExpired() && entry.status === STATUSES.NOT_COMPLETED);
+    }
+
+    FilterIncomingDeadlines(days) {
+        return this.todos.filter((entry) => !entry.isExpired() && entry.expiresIn() <= days);
+    }
+
     FilterByProject(project) {
         return this.todos.filter((entry) => (project === null || entry.project === project) && !entry.isExpired());
     }
 
     FilterByStatus(required_statuses) {
-        return this.todos.filter((entry) => required_statuses.includes(entry.status) && !entry.isExpired());
-    }
-
-    GetProjects() {
-        return this.projects;
+        return this.todos.filter((entry) => required_statuses.includes(entry.status) && !entry.isExpired()
+            && entry.status === STATUSES.NOT_COMPLETED);
     }
 
     GetCountsByCategories() {
