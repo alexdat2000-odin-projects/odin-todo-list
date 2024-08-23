@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const uuidv4 = require("uuid/v4")
 import {StorageGet, StorageSet} from "./storage";
 
@@ -9,10 +10,8 @@ const PRIORITIES = {
 }
 
 const STATUSES = {
-    NOT_STARTED: 0,
-    IN_PROGRESS: 1,
-    COMPLETED: 2,
-    CANCELLED: 3,
+    NOT_COMPLETED: 0,
+    COMPLETED: 1,
 }
 
 class TodoEntry {
@@ -50,19 +49,34 @@ class TodoEntry {
 
 class TodoList {
     todos = [];
+    projects = [];
 
     constructor() {
-        this.todos = StorageGet();
+        const saved_info = StorageGet();
+        this.todos = saved_info.todos;
+        this.projects = saved_info.projects;
     }
 
     #UpdateStorage() {
-        StorageSet(this.todos);
+        StorageSet(this.todos, this.projects);
     }
 
     AddEntry(title, description, priority, deadline, project, status) {
         this.todos.push(new TodoEntry(title, description, priority, deadline, project, status));
         this.todos.sort(TodoEntry.comp);
+        if (project !== null && !this.projects.includes(project)) {
+            this.projects.push(project);
+            this.projects.sort();
+        }
         this.#UpdateStorage();
+    }
+
+    AddProject(project) {
+        if (project !== null && !this.projects.includes(project)) {
+            this.projects.push(project);
+            this.projects.sort();
+            this.#UpdateStorage();
+        }
     }
 
     #GetIndexById(id) {
@@ -76,6 +90,10 @@ class TodoList {
             return;
         }
         this.todos[index].update(title, description, priority, deadline, project, status);
+        if (project !== null && !this.projects.includes(project)) {
+            this.projects.push(project);
+            this.projects.sort();
+        }
         this.#UpdateStorage();
     }
 
@@ -89,26 +107,56 @@ class TodoList {
         this.#UpdateStorage();
     }
 
-    FilterByProject(project) {
-        return this.todos.filter((entry) => (project === null || entry.project === project) && !entry.isExpired());
+    DeleteProject(project) {
+        const index = this.projects.indexOf(project);
+        if (index === -1) {
+            console.error(`Project ${project} not found!`);
+            return;
+        }
+        this.projects.splice(index, 1);
+        this.todos = this.todos.filter((element) => element.project !== project);
+        this.#UpdateStorage();
     }
 
-    GetProjectList() {
-        let projects = [];
-        for (let entry of this.todos) {
-            if (!entry.isExpired) {
-                projects.push(entry.project);
-            }
-        }
-        return [...new Set(projects)].toSorted();
+    GetAllProjects() {
+        return this.todos;
+    }
+
+    FilterByProject(project) {
+        return this.todos.filter((entry) => (project === null || entry.project === project) && !entry.isExpired());
     }
 
     FilterByStatus(required_statuses) {
         return this.todos.filter((entry) => required_statuses.includes(entry.status) && !entry.isExpired());
     }
 
-    FilterExpired() {
-        return this.todos.filter((entry) => entry.isExpired());
+    GetProjects() {
+        return this.projects;
+    }
+
+    GetCountsByCategories() {
+        let ans = {
+            low: 0,
+            normal: 0,
+            high: 0,
+            projects: {},
+        }
+        for (const project of this.projects) {
+            ans.projects[project] = 0;
+        }
+        for (const entry of this.todos) {
+            if (entry.priority === PRIORITIES.LOW) {
+                ans.low++;
+            } else if (entry.priority === PRIORITIES.NORMAL) {
+                ans.normal++;
+            } else if (entry.priority === PRIORITIES.HIGH) {
+                ans.high++;
+            }
+            if (entry.project !== null) {
+                ans.projects[entry.project]++;
+            }
+        }
+        return ans;
     }
 }
 

@@ -1,12 +1,19 @@
-function StorageSet(todos) {
+function StorageSet(todos, projects) {
     localStorage.todos = JSON.stringify(todos);
+    localStorage.projects = JSON.stringify(projects);
 }
 
 function StorageGet() {
     if (localStorage.todos === undefined) {
-        return [];
+        return {
+            todos: [],
+            projects: [],
+        };
     }
-    return JSON.parse(localStorage.todos);
+    return {
+        todos: JSON.parse(localStorage.todos),
+        projects: JSON.parse(localStorage.storage),
+    };
 }
 
 export {StorageSet, StorageGet};
