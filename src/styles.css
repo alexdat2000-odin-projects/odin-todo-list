@@ -169,6 +169,13 @@ body {
   font-size: 30px;
 }
 
+.task-completed::after {
+  content: url('./static/icons/tick-icon.svg');
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+}
+
 .task-deadline {
   grid-area: deadline;
   font-size: 0.8rem;
