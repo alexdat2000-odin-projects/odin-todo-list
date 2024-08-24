@@ -9,7 +9,7 @@ import {generate_main} from "./main-generating.js";
 import {StorageClear, StorageSetDefault} from "./storage";
 
 
-let todo_list = new TodoList();
+export let todo_list = new TodoList();
 let current_tab = 0;
 
 function render() {
@@ -52,7 +52,7 @@ function render() {
             break;
         default:
             current_todos = todo_list.FilterByProject(projects[current_tab - 7]);
-            new_main = generate_main(`Project "${projects[current_tab - 7]}"`, current_todos)
+            new_main = generate_main(`Project "${projects[current_tab - 7]}"`, current_todos, projects[current_tab - 7]);
             break;
     }
 

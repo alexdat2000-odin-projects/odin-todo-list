@@ -4,7 +4,7 @@ import delete_icon from './static/icons/trash-icon.png';
 import complete_icon from './static/icons/complete-icon.svg';
 import cross_icon from './static/icons/cross-icon.png';
 import {format} from "date-fns"
-
+import {show_tab, todo_list} from "./index";
 
 const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
@@ -25,7 +25,7 @@ function format_date(date) {
 }
 
 
-export function generate_main(title, todos) {
+export function generate_main(title, todos, project_name = "") {
     const elem = document.createElement("div");
     elem.id = "main";
 
@@ -36,15 +36,21 @@ export function generate_main(title, todos) {
     headerText.textContent = title;
     header.appendChild(headerText);
 
-    const editIcon = document.createElement("img");
-    editIcon.src = edit_icon;
-    editIcon.alt = "edit icon";
-    header.appendChild(editIcon);
+    if (project_name !== "") {
+        const editIcon = document.createElement("img");
+        editIcon.src = edit_icon;
+        editIcon.alt = "edit icon";
+        header.appendChild(editIcon);
 
-    const deleteIcon = document.createElement("img");
-    deleteIcon.src = delete_icon;
-    deleteIcon.alt = "delete icon";
-    header.appendChild(deleteIcon);
+        const deleteIcon = document.createElement("img");
+        deleteIcon.src = delete_icon;
+        deleteIcon.alt = "delete icon";
+        deleteIcon.addEventListener("click", () => {
+            todo_list.DeleteProject(project_name);
+            show_tab(1);
+        })
+        header.appendChild(deleteIcon);
+    }
     elem.appendChild(header);
 
     for (const todo of todos) {
