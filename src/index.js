@@ -1,4 +1,8 @@
 import "./styles.css"
+import "./style_header.css"
+import "./style_sidebar.css"
+import "./style_main.css"
+import "./style_footer.css"
 import {PRIORITIES, TodoList} from "./todo-logic.js";
 import {generate_sidebar} from "./sidebar-generating.js";
 import {generate_main} from "./main-generating.js";

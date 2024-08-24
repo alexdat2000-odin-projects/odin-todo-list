@@ -1,0 +1,52 @@
+#sidebar {
+  background: #e3e9ff;
+  grid-area: sidebar;
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px 10px 20px 10px;
+
+  gap: 30px;
+  overflow-y: auto;
+}
+
+#sidebar > div {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar h1 {
+  margin: 0 0 5px 10px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 20px 5px 20px;
+  border-radius: 5px;
+}
+
+.tab:hover {
+  background: #d4ddfe;
+}
+
+.tab.selected-tab {
+  background: #b2c3ff;
+}
+
+#sidebar img {
+  height: 30px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+#sidebar span {
+  font-size: 25px;
+}
+
+.new-project {
+  justify-content: center;
+  margin-top: 10px;
+}

@@ -1,0 +1,11 @@
+
+#footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  background: #af7eeb;
+  grid-area: footer;
+}

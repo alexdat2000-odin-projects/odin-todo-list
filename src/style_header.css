@@ -1,0 +1,18 @@
+#header {
+  background: #af7eeb;
+  grid-area: header;
+
+  padding-left: 50px;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+
+  font-family: "matemasieregular", sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  color: #e3e9ff;
+}
+
+#header > div {
+  margin-top: 10px;
+}

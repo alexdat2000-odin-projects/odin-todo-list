@@ -1,0 +1,106 @@
+#main {
+  grid-area: main;
+  margin: 20px 50px 20px 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+}
+
+#main-header {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px;
+  align-items: center;
+  justify-items: center;
+}
+
+#main-header > h1 {
+  font-size: 40px;
+}
+
+#main-header > img, .task-card > img {
+  height: 30px;
+  width: 30px;
+}
+
+.task-card {
+  display: grid;
+  grid-template-areas:
+            "stripe . . . ."
+            "stripe title btn1 btn2 btn3"
+            "stripe deadline btn1 btn2 btn3"
+            "stripe description . . ."
+            "stripe . . . .";
+  grid-template-columns: 5px 1fr 30px 30px 30px;
+  grid-template-rows: 5px max-content max-content max-content 5px;
+
+  column-gap: 10px;
+  border-radius: 10px;
+  border-top: 3px solid #e3e9ff;
+  border-right: 3px solid #e3e9ff;
+  border-bottom: 3px solid #e3e9ff;
+  padding-right: 20px;
+}
+
+.task-name {
+  grid-area: title;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.task-completed::after {
+  content: url('./static/icons/tick-icon.svg');
+  margin-left: 5px;
+}
+
+.task-deadline {
+  grid-area: deadline;
+  font-size: 0.8rem;
+  color: darkgray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.task-deadline::before {
+  content: url('./static/icons/alarm-clock-icon.svg');
+  margin-right: 5px;
+}
+
+.task-description {
+  grid-area: description;
+}
+
+.task-btn1 {
+  grid-area: btn1;
+  align-self: center;
+}
+
+.task-btn2 {
+  grid-area: btn2;
+  align-self: center;
+}
+
+.task-btn3 {
+  grid-area: btn3;
+  align-self: center;
+}
+
+.stripe {
+  grid-area: stripe;
+  border-radius: 10px;
+}
+
+.priority-high {
+  background: var(--priority-color-high);
+}
+
+.priority-normal {
+  background: var(--priority-color-normal);
+}
+
+.priority-low {
+  background: var(--priority-color-low);
+}
