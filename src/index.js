@@ -5,7 +5,7 @@ import {generate_main, MS_IN_DAY} from "./main-generating.js";
 
 
 let todo_list = new TodoList();
-let current_tab = 1;
+let current_tab = 0;
 
 function render() {
     const sidebar = document.getElementById("sidebar");
@@ -20,16 +20,11 @@ function render() {
 }
 
 export function show_tab(tab) {
+    console.log(tab);
     current_tab = tab;
     render();
 }
 
 window.onload = () => {
-    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
-        PRIORITIES.NORMAL, Math.floor(Date.now() / MS_IN_DAY), "Complete TOP", STATUSES.NOT_COMPLETED);
-    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
-        PRIORITIES.LOW, Math.floor(Date.now() / MS_IN_DAY) + 1, "Complete TOP", STATUSES.NOT_COMPLETED);
-    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
-        PRIORITIES.HIGH, Math.floor(Date.now() / MS_IN_DAY) + 4, "Complete TOP", STATUSES.NOT_COMPLETED);
     render();
 }

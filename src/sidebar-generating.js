@@ -11,7 +11,19 @@ import {show_tab} from "./index.js";
 
 export function generate_sidebar(todo_list, selected) {
     let counts_by_priorities = todo_list.GetCountsByPriorities();
+
     let counts_by_projects = todo_list.GetCountsByProjects();
+    let project_content = [];
+    let current_id = 7;
+    for (let proj in counts_by_projects) {
+        project_content.push({
+            src: project_icon,
+            alt: "project icon",
+            text: `${proj} (${counts_by_projects[proj]})`,
+            id: current_id,
+        })
+        current_id++;
+    }
 
     const content = [{
         header: null,
@@ -24,25 +36,25 @@ export function generate_sidebar(todo_list, selected) {
                     counts_by_priorities.normal +
                     counts_by_priorities.high
                 })`,
-                onclick: () => show_tab(0),
+                id: 0,
             },
             {
                 src: in_progress_icon,
                 alt: "in progress icon",
                 text: `In progress (${todo_list.FilterInProgress().length})`,
-                onclick: () => show_tab(1),
+                id: 1,
             },
             {
                 src: day_icon,
                 alt: "day icon",
                 text: `Due today (${todo_list.FilterIncomingDeadlines(1).length})`,
-                onclick: () => show_tab(2),
+                id: 2,
             },
             {
                 src: week_icon,
                 alt: "week icon",
                 text: `7 days (${todo_list.FilterIncomingDeadlines(7).length})`,
-                onclick: () => show_tab(3),
+                id: 3,
             },
         ]
     }, {
@@ -52,31 +64,24 @@ export function generate_sidebar(todo_list, selected) {
                 src: priority_icon_high,
                 alt: "high priority icon",
                 text: `High (${counts_by_priorities.high})`,
-                onclick: () => show_tab(4),
+                id: 4,
             },
             {
                 src: priority_icon_normal,
                 alt: "normal priority icon",
                 text: `Normal+ (${counts_by_priorities.normal + counts_by_priorities.high})`,
-                onclick: () => show_tab(5),
+                id: 5,
             },
             {
                 src: priority_icon_low,
                 alt: "low priority icon",
                 text: `Low+ (${counts_by_priorities.low + counts_by_priorities.normal + counts_by_priorities.high})`,
-                onclick: () => show_tab(6),
+                id: 6,
             },
         ]
     }, {
         header: 'Projects',
-        content: [
-            {
-                src: project_icon,
-                alt: "project icon",
-                text: `Complete Odin Project (0)`,
-                onclick: () => show_tab(7),
-            },
-        ]
+        content: project_content,
     }]
 
     const element = document.createElement("div");
@@ -97,7 +102,6 @@ export function generate_sidebar(todo_list, selected) {
             if (now_tab_id === selected) {
                 tabElem.classList.add("selected-tab");
             }
-            now_tab_id++;
 
             const icon = document.createElement("img");
             icon.src = tab.src;
@@ -107,7 +111,11 @@ export function generate_sidebar(todo_list, selected) {
             text.innerText = tab.text;
             tabElem.appendChild(text);
 
-            tabElem.addEventListener("click", tab.onclick);
+            tabElem.addEventListener("click", () => {
+                show_tab(tab.id);
+            });
+            now_tab_id++;
+
             blockElem.appendChild(tabElem);
         }
         element.appendChild(blockElem);

@@ -58,9 +58,13 @@ class TodoList {
     projects = [];
 
     constructor() {
-        // const saved_info = StorageGet();
-        // this.todos = saved_info.todos;
-        // this.projects = saved_info.projects;
+        const saved_info = StorageGet();
+        for (const entry of saved_info.todos) {
+            this.AddEntry(entry.title, entry.description, entry.priority, entry.deadline, entry.project, entry.status);
+        }
+        for (const proj of saved_info.projects) {
+            this.AddProject(proj);
+        }
     }
 
     #UpdateStorage() {
