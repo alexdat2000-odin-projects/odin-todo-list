@@ -79,7 +79,6 @@ body {
 #sidebar > div {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
 
@@ -92,7 +91,16 @@ body {
   flex-direction: row;
   gap: 10px;
   align-items: center;
-  padding-inline: 20px;
+  padding: 5px 20px 5px 20px;
+  border-radius: 5px;
+}
+
+.tab:hover {
+  background: #d4ddfe;
+}
+
+.tab.selected-tab {
+  background: #b2c3ff;
 }
 
 #sidebar img {

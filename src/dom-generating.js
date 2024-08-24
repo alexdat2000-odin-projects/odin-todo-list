@@ -9,7 +9,7 @@ import week_icon from './static/icons/week-icon.png';
 import {show_filter, show_project} from "./index";
 
 
-export function generate_sidebar(todo_list) {
+export function generate_sidebar(todo_list, selected) {
     let counts_by_priorities = todo_list.GetCountsByPriorities();
     let counts_by_projects = todo_list.GetCountsByProjects();
 
@@ -74,13 +74,15 @@ export function generate_sidebar(todo_list) {
                 src: project_icon,
                 alt: "project icon",
                 text: `Complete Odin Project (0)`,
-                onclick: () => show_project(`Complete Odin Project`),
+                onclick: () => show_filter(7),
             },
         ]
     }]
 
     const element = document.createElement("div");
     element.id = "sidebar";
+
+    let now_tab_id = 0;
     for (const block of content) {
         const blockElem = document.createElement("div");
         if (block.header != null) {
@@ -92,6 +94,10 @@ export function generate_sidebar(todo_list) {
         for (const tab of block.content) {
             const tabElem = document.createElement("div");
             tabElem.classList.add("tab");
+            if (now_tab_id === selected) {
+                tabElem.classList.add("selected-tab");
+            }
+            now_tab_id++;
 
             const icon = document.createElement("img");
             icon.src = tab.src;
