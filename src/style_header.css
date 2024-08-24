@@ -2,10 +2,9 @@
   background: #af7eeb;
   grid-area: header;
 
-  padding-left: 50px;
+  padding-inline: 50px;
   display: flex;
-  gap: 25px;
-  align-items: center;
+  justify-content: space-between;
 
   font-family: "matemasieregular", sans-serif;
   font-size: 60px;
@@ -14,5 +13,17 @@
 }
 
 #header > div {
+  display: flex;
+  gap: 25px;
+  align-items: center;
   margin-top: 10px;
+}
+
+#header button {
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem 2rem;
+  border-radius: 0.4rem;
+  width: 120px;
+  background: #e3e9ff;
 }

@@ -6,6 +6,7 @@ import "./style_footer.css"
 import {PRIORITIES, TodoList} from "./todo-logic.js";
 import {generate_sidebar} from "./sidebar-generating.js";
 import {generate_main} from "./main-generating.js";
+import {StorageClear, StorageSetDefault} from "./storage";
 
 
 let todo_list = new TodoList();
@@ -65,5 +66,19 @@ export function show_tab(tab) {
 }
 
 window.onload = () => {
+    const resetBtn = document.querySelector("#reset-btn");
+    resetBtn.addEventListener("click", () => {
+        StorageSetDefault();
+        todo_list.Reload();
+        render();
+    });
+
+    const clearBtn = document.querySelector("#clear-btn");
+    clearBtn.addEventListener("click", () => {
+        StorageClear();
+        todo_list.Reload();
+        render();
+    });
+
     render();
 }
