@@ -1,18 +1,19 @@
 import {v4 as uuidv4} from 'uuid';
 import {StorageGet, StorageSet} from "./storage.js";
-import {get_current_day} from "./main-generating";
+import {get_current_day} from "./utils";
 
 
-const PRIORITIES = {
+export const PRIORITIES = {
     LOW: 0,
     NORMAL: 1,
     HIGH: 2,
 }
 
-const STATUSES = {
+export const STATUSES = {
     NOT_COMPLETED: 0,
     COMPLETED: 1,
 }
+
 
 class TodoEntry {
     constructor(title, description, priority, deadline, project, status) {
@@ -203,4 +204,5 @@ class TodoList {
     }
 }
 
-export {PRIORITIES, STATUSES, TodoEntry, TodoList};
+
+export let todo_list = new TodoList();

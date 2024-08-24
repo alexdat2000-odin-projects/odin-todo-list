@@ -1,28 +1,12 @@
 import {PRIORITIES, STATUSES} from "./todo-logic.js";
+import {show_tab, render} from './dom-rendering'
+import {todo_list} from "./todo-logic.js";
+import {format_date} from "./utils";
+
 import edit_icon from './static/icons/edit-icon.svg';
 import delete_icon from './static/icons/trash-icon.png';
 import complete_icon from './static/icons/complete-icon.svg';
 import cross_icon from './static/icons/cross-icon.png';
-import {format} from "date-fns"
-import {show_tab, todo_list, render} from "./index";
-
-const MS_IN_DAY = 24 * 60 * 60 * 1000;
-
-export function get_current_day() {
-    return Math.floor(Date.now() / MS_IN_DAY);
-}
-
-
-function format_date(date) {
-    const date_now = get_current_day();
-    if (date === date_now) {
-        return "Today";
-    } else if (date_now + 1 === date) {
-        return "Tomorrow";
-    } else {
-        return format(date * MS_IN_DAY, "dd LLL yyyy");
-    }
-}
 
 
 export function generate_main(title, todos, project_name = "") {

@@ -1,3 +1,5 @@
+import {show_tab} from "./dom-rendering";
+
 import all_icon from './static/icons/all-icon.png';
 import day_icon from './static/icons/day-icon.png';
 import in_progress_icon from './static/icons/in-progress-icon.png';
@@ -7,7 +9,6 @@ import priority_icon_normal from './static/icons/priority-icon-normal.png';
 import priority_icon_high from './static/icons/priority-icon-high.png';
 import project_icon from './static/icons/project-icon.png';
 import week_icon from './static/icons/week-icon.png';
-import {show_tab} from "./index.js";
 
 
 export function generate_sidebar(todo_list, selected) {

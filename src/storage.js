@@ -1,4 +1,4 @@
-import {get_current_day} from "./main-generating";
+import {get_current_day} from "./utils";
 
 export function StorageSet(todos, projects) {
     localStorage.todos = JSON.stringify(todos);
