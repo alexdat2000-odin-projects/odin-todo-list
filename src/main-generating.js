@@ -3,6 +3,21 @@ import edit_icon from './static/icons/edit-icon.svg';
 import delete_icon from './static/icons/trash-icon.png';
 import complete_icon from './static/icons/complete-icon.svg';
 import cross_icon from './static/icons/cross-icon.png';
+import {format} from "date-fns"
+
+
+export const MS_IN_DAY = 24 * 60 * 60 * 1000;
+
+function format_date(date) {
+    const date_now = Math.floor(Date.now() / MS_IN_DAY);
+    if (date === date_now) {
+        return "Today";
+    } else if (date_now + 1 === date) {
+        return "Tomorrow";
+    } else {
+        return format(date * MS_IN_DAY, "dd LLL yyyy");
+    }
+}
 
 
 export function generate_main(title, todos) {
@@ -56,7 +71,7 @@ export function generate_main(title, todos) {
 
         const deadline = document.createElement("div");
         deadline.classList.add("task-deadline");
-        deadline.textContent = todo.deadline;
+        deadline.textContent = format_date(todo.deadline);
         card.appendChild(deadline);
 
         const description = document.createElement("div");

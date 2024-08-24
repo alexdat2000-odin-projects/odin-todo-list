@@ -1,5 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import {StorageGet, StorageSet} from "./storage.js";
+import {MS_IN_DAY} from "./main-generating";
 
 
 const PRIORITIES = {
@@ -41,11 +42,13 @@ class TodoEntry {
     }
 
     isExpired() {
-        return this.deadline + (60 * 60 * 24 * 1000) < Date.now();
+        const date_now = Math.floor(Date.now() / MS_IN_DAY);
+        return this.deadline < date_now;
     }
 
     expiresIn() {
-        return Math.floor((this.deadline + (60 * 60 * 24 * 1000) - Date.now()) / (60 * 60 * 24 * 1000));
+        const date_now = Math.floor(Date.now() / MS_IN_DAY);
+        return this.deadline - date_now;
     }
 }
 

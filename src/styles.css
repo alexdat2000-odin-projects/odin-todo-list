@@ -171,8 +171,6 @@ body {
 
 .task-completed::after {
   content: url('./static/icons/tick-icon.svg');
-  width: 15px;
-  height: 15px;
   margin-left: 5px;
 }
 
@@ -180,6 +178,14 @@ body {
   grid-area: deadline;
   font-size: 0.8rem;
   color: darkgray;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.task-deadline::before {
+  content: url('./static/icons/alarm-clock-icon.svg');
+  margin-right: 5px;
 }
 
 .task-description {

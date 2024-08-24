@@ -1,7 +1,7 @@
 import "./styles.css"
 import {PRIORITIES, STATUSES, TodoList} from "./todo-logic.js";
 import {generate_sidebar} from "./sidebar-generating.js";
-import {generate_main} from "./main-generating.js";
+import {generate_main, MS_IN_DAY} from "./main-generating.js";
 
 
 let todo_list = new TodoList();
@@ -26,6 +26,10 @@ export function show_tab(tab) {
 
 window.onload = () => {
     todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
-        PRIORITIES.NORMAL, Date.now(), "Complete TOP", STATUSES.NOT_COMPLETED);
+        PRIORITIES.NORMAL, Math.floor(Date.now() / MS_IN_DAY), "Complete TOP", STATUSES.NOT_COMPLETED);
+    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
+        PRIORITIES.LOW, Math.floor(Date.now() / MS_IN_DAY) + 1, "Complete TOP", STATUSES.NOT_COMPLETED);
+    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
+        PRIORITIES.HIGH, Math.floor(Date.now() / MS_IN_DAY) + 4, "Complete TOP", STATUSES.NOT_COMPLETED);
     render();
 }
