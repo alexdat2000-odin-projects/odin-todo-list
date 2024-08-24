@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'uuid';
-import {StorageGet, StorageSet} from "./storage";
+import {v4 as uuidv4} from 'uuid';
+import {StorageGet, StorageSet} from "./storage.js";
 
 
 const PRIORITIES = {
@@ -55,9 +55,9 @@ class TodoList {
     projects = [];
 
     constructor() {
-        const saved_info = StorageGet();
-        this.todos = saved_info.todos;
-        this.projects = saved_info.projects;
+        // const saved_info = StorageGet();
+        // this.todos = saved_info.todos;
+        // this.projects = saved_info.projects;
     }
 
     #UpdateStorage() {
@@ -121,7 +121,7 @@ class TodoList {
         this.#UpdateStorage();
     }
 
-    GetAllProjects() {
+    GetAllEntries() {
         return this.todos;
     }
 
@@ -134,7 +134,9 @@ class TodoList {
     }
 
     FilterByProject(project) {
-        return this.todos.filter((entry) => (project === null || entry.project === project) && !entry.isExpired());
+        return this.todos.filter((entry) => {
+            (project === null || entry.project === project) && !entry.isExpired();
+        });
     }
 
     FilterByStatus(required_statuses) {

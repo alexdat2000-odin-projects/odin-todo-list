@@ -1,23 +1,31 @@
 import "./styles.css"
-import {generate_sidebar} from "./dom-generating";
-import {TodoList} from "./todo-logic";
+import {PRIORITIES, STATUSES, TodoList} from "./todo-logic.js";
+import {generate_sidebar} from "./sidebar-generating.js";
+import {generate_main} from "./main-generating.js";
+
 
 let todo_list = new TodoList();
 let current_tab = 1;
 
-function update_sidebar() {
+function render() {
     const sidebar = document.getElementById("sidebar");
     const body = document.querySelector("body");
-
     body.insertBefore(generate_sidebar(todo_list, current_tab), sidebar);
     body.removeChild(sidebar);
+
+    const main = document.getElementById("main");
+
+    body.insertBefore(generate_main("Test", todo_list.GetAllEntries()), main);
+    body.removeChild(main);
 }
 
 export function show_tab(tab) {
     current_tab = tab;
-    update_sidebar();
+    render();
 }
 
 window.onload = () => {
-    update_sidebar(null);
+    todo_list.AddEntry("JavaScript course", "Complete all content of JavaScript course from TheOdinProject",
+        PRIORITIES.NORMAL, Date.now(), "Complete TOP", STATUSES.NOT_COMPLETED);
+    render();
 }

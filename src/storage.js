@@ -12,7 +12,7 @@ function StorageGet() {
     }
     return {
         todos: JSON.parse(localStorage.todos),
-        projects: JSON.parse(localStorage.storage),
+        projects: JSON.parse(localStorage.projects),
     };
 }
 
