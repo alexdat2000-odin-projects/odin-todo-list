@@ -6,7 +6,7 @@ import priority_icon_normal from './static/icons/priority-icon-normal.png';
 import priority_icon_high from './static/icons/priority-icon-high.png';
 import project_icon from './static/icons/project-icon.png';
 import week_icon from './static/icons/week-icon.png';
-import {show_filter, show_project} from "./index";
+import {show_tab, show_project} from "./index";
 
 
 export function generate_sidebar(todo_list, selected) {
@@ -24,25 +24,25 @@ export function generate_sidebar(todo_list, selected) {
                     counts_by_priorities.normal +
                     counts_by_priorities.high
                 })`,
-                onclick: () => show_filter(0),
+                onclick: () => show_tab(0),
             },
             {
                 src: in_progress_icon,
                 alt: "in progress icon",
                 text: `In progress (${todo_list.FilterInProgress().length})`,
-                onclick: () => show_filter(1),
+                onclick: () => show_tab(1),
             },
             {
                 src: day_icon,
                 alt: "day icon",
                 text: `Due today (${todo_list.FilterIncomingDeadlines(1).length})`,
-                onclick: () => show_filter(2),
+                onclick: () => show_tab(2),
             },
             {
                 src: week_icon,
                 alt: "week icon",
                 text: `7 days (${todo_list.FilterIncomingDeadlines(7).length})`,
-                onclick: () => show_filter(3),
+                onclick: () => show_tab(3),
             },
         ]
     }, {
@@ -52,19 +52,19 @@ export function generate_sidebar(todo_list, selected) {
                 src: priority_icon_high,
                 alt: "high priority icon",
                 text: `High (${counts_by_priorities.high})`,
-                onclick: () => show_filter(4),
+                onclick: () => show_tab(4),
             },
             {
                 src: priority_icon_normal,
                 alt: "normal priority icon",
                 text: `Normal+ (${counts_by_priorities.normal + counts_by_priorities.high})`,
-                onclick: () => show_filter(5),
+                onclick: () => show_tab(5),
             },
             {
                 src: priority_icon_low,
                 alt: "low priority icon",
                 text: `Low+ (${counts_by_priorities.low + counts_by_priorities.normal + counts_by_priorities.high})`,
-                onclick: () => show_filter(6),
+                onclick: () => show_tab(6),
             },
         ]
     }, {
@@ -74,7 +74,7 @@ export function generate_sidebar(todo_list, selected) {
                 src: project_icon,
                 alt: "project icon",
                 text: `Complete Odin Project (0)`,
-                onclick: () => show_filter(7),
+                onclick: () => show_tab(7),
             },
         ]
     }]

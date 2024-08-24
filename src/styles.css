@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 @font-face {
   font-family: 'matemasieregular';
   src: url('static/matemasie-regular-webfont.woff2') format('woff2'),
@@ -10,6 +12,8 @@
   --priority-color-high: #FA5252;
   --priority-color-normal: #FCC419;
   --priority-color-low: #94D82D;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 
 body {
@@ -115,6 +119,96 @@ body {
 
 #main {
   grid-area: main;
+  margin: 20px 50px 20px 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+}
+
+#main-header {
+  display: grid;
+  grid-template-columns: 1fr 50px 50px;
+  align-items: center;
+  justify-items: center;
+}
+
+#main-header > h1 {
+  font-size: 40px;
+}
+
+#main-header > img, .task-card > img {
+  height: 30px;
+  width: 30px;
+}
+
+.task-card {
+  display: grid;
+  grid-template-areas:
+            "stripe . . . ."
+            "stripe title btn1 btn2 btn3"
+            "stripe deadline btn1 btn2 btn3"
+            "stripe description . . ."
+            "stripe . . . .";
+  grid-template-columns: 5px 1fr 30px 30px 30px;
+  grid-template-rows: 5px max-content max-content max-content 5px;
+
+  column-gap: 10px;
+  border-radius: 10px;
+  border-top: 3px solid #e3e9ff;
+  border-right: 3px solid #e3e9ff;
+  border-bottom: 3px solid #e3e9ff;
+  padding-right: 20px;
+}
+
+.task-name {
+  grid-area: title;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.task-deadline {
+  grid-area: deadline;
+  font-size: 0.8rem;
+  color: darkgray;
+}
+
+.task-description {
+  grid-area: description;
+}
+
+.task-btn1 {
+  grid-area: btn1;
+  align-self: center;
+}
+
+.task-btn2 {
+  grid-area: btn2;
+  align-self: center;
+}
+
+.task-btn3 {
+  grid-area: btn3;
+  align-self: center;
+}
+
+.stripe {
+  grid-area: stripe;
+  border-radius: 10px;
+}
+
+.priority-high {
+  background: var(--priority-color-high);
+}
+
+.priority-normal {
+  background: var(--priority-color-normal);
+}
+
+.priority-low {
+  background: var(--priority-color-low);
 }
 
 #footer {
@@ -126,4 +220,47 @@ body {
   font-family: Roboto, sans-serif;
   background: #af7eeb;
   grid-area: footer;
+}
+
+
+
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
