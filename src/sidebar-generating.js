@@ -1,6 +1,7 @@
 import all_icon from './static/icons/all-icon.png';
 import day_icon from './static/icons/day-icon.png';
 import in_progress_icon from './static/icons/in-progress-icon.png';
+import plus_icon from './static/icons/plus-icon.svg';
 import priority_icon_low from './static/icons/priority-icon-low.png';
 import priority_icon_normal from './static/icons/priority-icon-normal.png';
 import priority_icon_high from './static/icons/priority-icon-high.png';
@@ -120,5 +121,18 @@ export function generate_sidebar(todo_list, selected) {
         }
         element.appendChild(blockElem);
     }
+
+    const newElem = document.createElement("div");
+    newElem.classList.add("tab");
+    newElem.classList.add("new-project");
+    const icon = document.createElement("img");
+    icon.src = plus_icon;
+    icon.alt = "plus icon";
+    newElem.appendChild(icon);
+    const text = document.createElement("span");
+    text.innerText = "New project"
+    newElem.appendChild(text);
+    element.lastChild.appendChild(newElem);
+
     return element;
 }
