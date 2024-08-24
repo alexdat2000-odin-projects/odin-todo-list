@@ -34,6 +34,10 @@ class TodoEntry {
         this.status = status;
     }
 
+    ToggleStatus() {
+        this.status ^= 1;
+    }
+
     static comp(lhs, rhs) {  // Sort by date asc, priority desc
         if (lhs.deadline !== rhs.deadline) {
             return lhs.deadline - rhs.deadline;
@@ -111,6 +115,15 @@ class TodoList {
             this.projects.sort();
         }
         this.#UpdateStorage();
+    }
+
+    ToggleEntryStatus(id) {
+        const index = this.#GetIndexById(id);
+        if (index === -1) {
+            console.error(`ID ${id} not found!`);
+            return;
+        }
+        this.todos[index].ToggleStatus();
     }
 
     DeleteEntry(id) {

@@ -12,7 +12,7 @@ import {StorageClear, StorageSetDefault} from "./storage";
 export let todo_list = new TodoList();
 let current_tab = 0;
 
-function render() {
+export function render() {
     const sidebar = document.getElementById("sidebar");
     const body = document.querySelector("body");
     body.insertBefore(generate_sidebar(todo_list, current_tab), sidebar);

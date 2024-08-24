@@ -4,7 +4,7 @@ import delete_icon from './static/icons/trash-icon.png';
 import complete_icon from './static/icons/complete-icon.svg';
 import cross_icon from './static/icons/cross-icon.png';
 import {format} from "date-fns"
-import {show_tab, todo_list} from "./index";
+import {show_tab, todo_list, render} from "./index";
 
 const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
@@ -46,8 +46,10 @@ export function generate_main(title, todos, project_name = "") {
         deleteIcon.src = delete_icon;
         deleteIcon.alt = "delete icon";
         deleteIcon.addEventListener("click", () => {
-            todo_list.DeleteProject(project_name);
-            show_tab(1);
+            if (window.confirm(`Are you sure you want to delete project ${project_name}?`)) {
+                todo_list.DeleteProject(project_name);
+                show_tab(1);
+            }
         })
         header.appendChild(deleteIcon);
     }
@@ -104,6 +106,10 @@ export function generate_main(title, todos, project_name = "") {
             statusIcon.src = complete_icon;
             statusIcon.alt = "complete icon";
         }
+        statusIcon.addEventListener("click", () => {
+            todo_list.ToggleEntryStatus(todo.id);
+            render();
+        })
         statusIcon.classList.add("task-btn2");
         card.appendChild(statusIcon);
 
@@ -111,6 +117,10 @@ export function generate_main(title, todos, project_name = "") {
         deleteIcon.src = delete_icon;
         deleteIcon.alt = "delete icon";
         deleteIcon.classList.add("task-btn3");
+        deleteIcon.addEventListener("click", () => {
+            todo_list.DeleteEntry(todo.id);
+            render();
+        })
         card.appendChild(deleteIcon);
 
         elem.appendChild(card);
