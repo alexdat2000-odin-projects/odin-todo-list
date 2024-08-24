@@ -1,7 +1,7 @@
 import "./styles.css"
-import {PRIORITIES, STATUSES, TodoList} from "./todo-logic.js";
+import {TodoList} from "./todo-logic.js";
 import {generate_sidebar} from "./sidebar-generating.js";
-import {generate_main, MS_IN_DAY} from "./main-generating.js";
+import {generate_main} from "./main-generating.js";
 
 
 let todo_list = new TodoList();
