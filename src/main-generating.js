@@ -6,10 +6,15 @@ import cross_icon from './static/icons/cross-icon.png';
 import {format} from "date-fns"
 
 
-export const MS_IN_DAY = 24 * 60 * 60 * 1000;
+const MS_IN_DAY = 24 * 60 * 60 * 1000;
+
+export function get_current_day() {
+    return Math.floor(Date.now() / MS_IN_DAY);
+}
+
 
 function format_date(date) {
-    const date_now = Math.floor(Date.now() / MS_IN_DAY);
+    const date_now = get_current_day();
     if (date === date_now) {
         return "Today";
     } else if (date_now + 1 === date) {

@@ -1,3 +1,5 @@
+import {get_current_day} from "./main-generating";
+
 function StorageSet(todos, projects) {
     localStorage.todos = JSON.stringify(todos);
     localStorage.projects = JSON.stringify(projects);
@@ -10,7 +12,7 @@ function StorageGet() {
                 "title": "JavaScript course",
                 "description": "Complete all content of JavaScript course from TheOdinProject",
                 "priority": 1,
-                "deadline": 19959,
+                "deadline": get_current_day(),
                 "project": "Complete TOP",
                 "status": 0,
                 "id": "62597696"
@@ -18,20 +20,36 @@ function StorageGet() {
                 "title": "JavaScript course",
                 "description": "Complete all content of JavaScript course from TheOdinProject",
                 "priority": 0,
-                "deadline": 19960,
+                "deadline": get_current_day() + 1,
                 "project": "Complete TOP",
-                "status": 0,
+                "status": 1,
                 "id": "964691f4"
             }, {
                 "title": "JavaScript course",
                 "description": "Complete all content of JavaScript course from TheOdinProject",
                 "priority": 2,
-                "deadline": 19963,
+                "deadline": get_current_day() + 5,
                 "project": "Complete TOP",
                 "status": 0,
                 "id": "a3e2fa27"
-            }],
-            projects: ["Complete TOP"],
+            }, {
+                "title": "JavaScript course",
+                "description": "Complete all content of JavaScript course from TheOdinProject",
+                "priority": 1,
+                "deadline": get_current_day() + 10,
+                "project": "Touch grass",
+                "status": 0,
+                "id": "62597696"
+            }, {
+                "title": "JavaScript course",
+                "description": "Complete all content of JavaScript course from TheOdinProject",
+                "priority": 1,
+                "deadline": get_current_day() + 2,
+                "project": "",
+                "status": 0,
+                "id": "62597696"
+            },],
+            projects: ["Complete TOP", "Touch grass", "New project"],
         };
     }
     return {

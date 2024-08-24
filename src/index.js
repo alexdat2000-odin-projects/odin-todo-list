@@ -30,11 +30,11 @@ function render() {
             new_main = generate_main("In progress", current_todos)
             break;
         case 2:
-            current_todos = todo_list.FilterIncomingDeadlines(0);
+            current_todos = todo_list.FilterIncomingDeadlines(1);
             new_main = generate_main("Due today", current_todos)
             break;
         case 3:
-            current_todos = todo_list.FilterIncomingDeadlines(6);
+            current_todos = todo_list.FilterIncomingDeadlines(7);
             new_main = generate_main("7 days", current_todos)
             break;
         case 4:

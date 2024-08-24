@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import {StorageGet, StorageSet} from "./storage.js";
-import {MS_IN_DAY} from "./main-generating";
+import {get_current_day} from "./main-generating";
 
 
 const PRIORITIES = {
@@ -42,12 +42,12 @@ class TodoEntry {
     }
 
     isExpired() {
-        const date_now = Math.floor(Date.now() / MS_IN_DAY);
+        const date_now = get_current_day();
         return this.deadline < date_now;
     }
 
     expiresIn() {
-        const date_now = Math.floor(Date.now() / MS_IN_DAY);
+        const date_now = get_current_day();
         return this.deadline - date_now;
     }
 }
@@ -74,7 +74,7 @@ class TodoList {
     AddEntry(title, description, priority, deadline, project, status) {
         this.todos.push(new TodoEntry(title, description, priority, deadline, project, status));
         this.todos.sort(TodoEntry.comp);
-        if (project !== null && !this.projects.includes(project)) {
+        if (project !== "" && !this.projects.includes(project)) {
             this.projects.push(project);
             this.projects.sort();
         }
@@ -82,7 +82,7 @@ class TodoList {
     }
 
     AddProject(project) {
-        if (project !== null && !this.projects.includes(project)) {
+        if (project !== "" && !this.projects.includes(project)) {
             this.projects.push(project);
             this.projects.sort();
             this.#UpdateStorage();
@@ -100,7 +100,7 @@ class TodoList {
             return;
         }
         this.todos[index].update(title, description, priority, deadline, project, status);
-        if (project !== null && !this.projects.includes(project)) {
+        if (project !== "" && !this.projects.includes(project)) {
             this.projects.push(project);
             this.projects.sort();
         }
@@ -145,8 +145,7 @@ class TodoList {
     }
 
     FilterByPriority(required_statuses) {
-        return this.todos.filter((entry) => required_statuses.includes(entry.priority) && !entry.isExpired()
-            && entry.status === STATUSES.NOT_COMPLETED);
+        return this.todos.filter((entry) => required_statuses.includes(entry.priority) && !entry.isExpired());
     }
 
     GetCountsByPriorities() {
@@ -173,7 +172,7 @@ class TodoList {
             projects[project] = 0;
         }
         for (const entry of this.todos) {
-            if (entry.project !== null) {
+            if (entry.project !== "") {
                 projects[entry.project]++;
             }
         }
