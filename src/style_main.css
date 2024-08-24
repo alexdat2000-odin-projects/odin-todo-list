@@ -69,6 +69,10 @@
   margin-right: 5px;
 }
 
+.expired {
+  color: indianred;
+}
+
 .task-description {
   grid-area: description;
 }

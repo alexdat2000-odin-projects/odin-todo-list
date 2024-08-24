@@ -58,8 +58,16 @@ export function StorageSetDefault() {
         "title": "JavaScript course",
         "description": "Complete all content of JavaScript course from TheOdinProject",
         "priority": 1,
-        "deadline": get_current_day() + 2,
+        "deadline": get_current_day() - 2,
         "project": "",
+        "status": 0,
+        "id": "62597696"
+    }, {
+        "title": "JavaScript course",
+        "description": "Complete all content of JavaScript course from TheOdinProject",
+        "priority": 2,
+        "deadline": -1,
+        "project": "Complete TOP",
         "status": 0,
         "id": "62597696"
     },

@@ -48,12 +48,12 @@ class TodoEntry {
 
     isExpired() {
         const date_now = get_current_day();
-        return this.deadline < date_now;
+        return this.deadline !== -1 && this.deadline < date_now;
     }
 
     expiresIn() {
         const date_now = get_current_day();
-        return this.deadline - date_now;
+        return this.deadline === -1 ? Infinity : this.deadline - date_now;
     }
 }
 
@@ -153,7 +153,7 @@ class TodoList {
     }
 
     FilterInProgress() {
-        return this.todos.filter((entry) => !entry.isExpired() && entry.status === STATUSES.NOT_COMPLETED);
+        return this.todos.filter((entry) => entry.status === STATUSES.NOT_COMPLETED);
     }
 
     FilterIncomingDeadlines(days) {
@@ -161,11 +161,11 @@ class TodoList {
     }
 
     FilterByProject(project) {
-        return this.todos.filter((entry) => entry.project === project && !entry.isExpired());
+        return this.todos.filter((entry) => entry.project === project);
     }
 
     FilterByPriority(required_statuses) {
-        return this.todos.filter((entry) => required_statuses.includes(entry.priority) && !entry.isExpired());
+        return this.todos.filter((entry) => required_statuses.includes(entry.priority));
     }
 
     GetCountsByPriorities() {

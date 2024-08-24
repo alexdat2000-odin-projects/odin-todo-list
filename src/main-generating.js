@@ -69,6 +69,9 @@ export function generate_main(title, todos, project_name = "") {
         const deadline = document.createElement("div");
         deadline.classList.add("task-deadline");
         deadline.textContent = format_date(todo.deadline);
+        if (todo.isExpired() && todo.status === STATUSES.NOT_COMPLETED) {
+            deadline.classList.add("expired");
+        }
         card.appendChild(deadline);
 
         const description = document.createElement("div");
