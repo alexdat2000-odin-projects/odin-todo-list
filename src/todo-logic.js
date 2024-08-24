@@ -137,17 +137,15 @@ class TodoList {
     }
 
     FilterIncomingDeadlines(days) {
-        return this.todos.filter((entry) => !entry.isExpired() && entry.expiresIn() <= days);
+        return this.todos.filter((entry) => !entry.isExpired() && entry.expiresIn() < days);
     }
 
     FilterByProject(project) {
-        return this.todos.filter((entry) => {
-            (project === null || entry.project === project) && !entry.isExpired();
-        });
+        return this.todos.filter((entry) => entry.project === project && !entry.isExpired());
     }
 
-    FilterByStatus(required_statuses) {
-        return this.todos.filter((entry) => required_statuses.includes(entry.status) && !entry.isExpired()
+    FilterByPriority(required_statuses) {
+        return this.todos.filter((entry) => required_statuses.includes(entry.priority) && !entry.isExpired()
             && entry.status === STATUSES.NOT_COMPLETED);
     }
 
@@ -180,6 +178,10 @@ class TodoList {
             }
         }
         return projects;
+    }
+
+    GetProjects() {
+        return this.projects;
     }
 }
 

@@ -1,5 +1,5 @@
 import "./styles.css"
-import {TodoList} from "./todo-logic.js";
+import {PRIORITIES, TodoList} from "./todo-logic.js";
 import {generate_sidebar} from "./sidebar-generating.js";
 import {generate_main} from "./main-generating.js";
 
@@ -12,15 +12,50 @@ function render() {
     const body = document.querySelector("body");
     body.insertBefore(generate_sidebar(todo_list, current_tab), sidebar);
     body.removeChild(sidebar);
-
     const main = document.getElementById("main");
 
-    body.insertBefore(generate_main("Test", todo_list.GetAllEntries()), main);
+    const projects = todo_list.GetProjects();
+    let current_todos, new_main;
+    switch (current_tab) {
+        case 0:
+            current_todos = todo_list.GetAllEntries();
+            new_main = generate_main("All", current_todos)
+            break;
+        case 1:
+            current_todos = todo_list.FilterInProgress();
+            new_main = generate_main("In progress", current_todos)
+            break;
+        case 2:
+            current_todos = todo_list.FilterIncomingDeadlines(0);
+            new_main = generate_main("Due today", current_todos)
+            break;
+        case 3:
+            current_todos = todo_list.FilterIncomingDeadlines(6);
+            new_main = generate_main("7 days", current_todos)
+            break;
+        case 4:
+            current_todos = todo_list.FilterByPriority([PRIORITIES.HIGH]);
+            new_main = generate_main("High priority", current_todos)
+            break;
+        case 5:
+            current_todos = todo_list.FilterByPriority([PRIORITIES.HIGH, PRIORITIES.NORMAL]);
+            new_main = generate_main("Normal+ priority", current_todos)
+            break;
+        case 6:
+            current_todos = todo_list.FilterByPriority([PRIORITIES.HIGH, PRIORITIES.NORMAL, PRIORITIES.LOW]);
+            new_main = generate_main("Low+ priority", current_todos);
+            break;
+        default:
+            current_todos = todo_list.FilterByProject(projects[current_tab - 7]);
+            new_main = generate_main(`Project "${projects[current_tab - 7]}"`, current_todos)
+            break;
+    }
+
+    body.insertBefore(new_main, main);
     body.removeChild(main);
 }
 
 export function show_tab(tab) {
-    console.log(tab);
     current_tab = tab;
     render();
 }
