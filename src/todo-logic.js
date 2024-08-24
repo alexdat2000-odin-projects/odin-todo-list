@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-undef
-const uuidv4 = require("uuid/v4")
+import { v4 as uuidv4 } from 'uuid';
 import {StorageGet, StorageSet} from "./storage";
 
 
