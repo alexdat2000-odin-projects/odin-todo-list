@@ -67,7 +67,7 @@ export function generate_main(title, todos) {
         const editIcon = document.createElement("img");
         editIcon.src = edit_icon;
         editIcon.alt = "edit icon";
-        editIcon.classList.add("btn1");
+        editIcon.classList.add("task-btn1");
         card.appendChild(editIcon);
 
         const statusIcon = document.createElement("img");
@@ -78,13 +78,13 @@ export function generate_main(title, todos) {
             statusIcon.src = complete_icon;
             statusIcon.alt = "complete icon";
         }
-        statusIcon.classList.add("btn2");
+        statusIcon.classList.add("task-btn2");
         card.appendChild(statusIcon);
 
         const deleteIcon = document.createElement("img");
         deleteIcon.src = delete_icon;
         deleteIcon.alt = "delete icon";
-        deleteIcon.classList.add("btn3");
+        deleteIcon.classList.add("task-btn3");
         card.appendChild(deleteIcon);
 
         elem.appendChild(card);
