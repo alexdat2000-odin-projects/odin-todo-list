@@ -1,6 +1,6 @@
 import {format} from "date-fns";
 
-const MS_IN_DAY = 24 * 60 * 60 * 1000;
+export const MS_IN_DAY = 24 * 60 * 60 * 1000;
 
 export function format_date(date) {
     const date_now = get_current_day();

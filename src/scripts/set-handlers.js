@@ -1,6 +1,7 @@
 import {StorageClear, StorageSetDefault} from "./storage";
-import {todo_list} from "./todo-logic";
-import {show_tab, current_tab} from "./dom-rendering";
+import {STATUSES, todo_list} from "./todo-logic";
+import {show_tab, current_tab, render} from "./dom-rendering";
+import {MS_IN_DAY} from "./utils";
 
 export function headerButtonHandlers() {
     const resetBtn = document.querySelector("#reset-btn");
@@ -121,5 +122,75 @@ export function renameProjectButtonHandlers() {
         } else {
             inpt.setCustomValidity("");
         }
+    });
+}
+
+
+export function addTaskButtonHandlers() {
+    const modal = document.querySelector("#add-task-dialog");
+    const form = document.querySelector("#add-task-form");
+
+    const closeImg = document.querySelector("#add-task-reset-img");
+    closeImg.addEventListener("click", () => {
+        modal.close();
+        form.reset();
+    });
+
+    const closeBtn = document.querySelector("#add-task-reset");
+    closeBtn.addEventListener("click", () => {
+        modal.close();
+        form.reset();
+    });
+
+    modal.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        modal.close();
+        form.reset();
+    });
+
+
+    const addBtn = document.querySelector("#add-task-add");
+    const nameInpt = document.querySelector("#add-task-name");
+    const descInpt = document.querySelector("#add-task-description");
+    const deadlineInpt = document.querySelector("#add-task-deadline");
+    const priorityInpt = document.querySelector('input[name="priority"]:checked');
+    const projectInpt = document.querySelector("#add-task-project");
+
+    addBtn.addEventListener("click", (e) => {
+        if (!deadlineInpt.checkValidity() || !nameInpt.checkValidity()) {
+            return false;
+        }
+        e.preventDefault();
+        console.log("a");
+        todo_list.AddEntry(
+            nameInpt.value,
+            descInpt.value,
+            Number(priorityInpt.value),
+            deadlineInpt.value === "" ? -1 : Math.floor((new Date(`${deadlineInpt.value}T00:00:00.000Z`)) / MS_IN_DAY),
+            projectInpt.value,
+            STATUSES.NOT_COMPLETED,
+        );
+
+        render();
+        modal.close();
+        form.reset();
+    });
+
+    deadlineInpt.addEventListener("input", () => {
+        const val = deadlineInpt.value;
+        if (val === 0) {
+            deadlineInpt.setCustomValidity("");
+            return;
+        }
+        if (isNaN(new Date(`${deadlineInpt.value}T00:00:00.000Z`).getDate())) {
+            deadlineInpt.setCustomValidity("Invalid Date");
+            return;
+        }
+        const day = Math.floor((new Date(`${deadlineInpt.value}T00:00:00.000Z`)) / MS_IN_DAY);
+        if (day < 0 || day > 30000) {
+            deadlineInpt.setCustomValidity("Invalid Date");
+            return;
+        }
+        deadlineInpt.setCustomValidity("");
     });
 }
