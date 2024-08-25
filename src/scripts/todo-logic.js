@@ -202,6 +202,14 @@ class TodoList {
     GetProjects() {
         return this.projects;
     }
+
+    ProjectExists(project) {
+        return this.projects.includes(project);
+    }
+
+    GetProjectId(project) {
+        return this.projects.indexOf(project);
+    }
 }
 
 

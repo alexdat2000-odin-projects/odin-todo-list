@@ -9,7 +9,6 @@ import priority_icon_normal from '../../assets/icons/priority-icon-normal.png';
 import priority_icon_high from '../../assets/icons/priority-icon-high.png';
 import project_icon from '../../assets/icons/project-icon.png';
 import week_icon from '../../assets/icons/week-icon.png';
-import {newProjectPopup} from "./modals";
 
 
 export function generate_sidebar(todo_list, selected) {
@@ -135,9 +134,6 @@ export function generate_sidebar(todo_list, selected) {
     text.innerText = "New project"
     newElem.appendChild(text);
     newElem.addEventListener("click", () => {
-        // const newProjectPopUp = newProjectPopup();
-        // const bodyElement = document.querySelector("body");
-        // bodyElement.appendChild(newProjectPopUp);
         const newProjectPopUp = document.querySelector("#new-project-dialog");
         newProjectPopUp.showModal();
     });
