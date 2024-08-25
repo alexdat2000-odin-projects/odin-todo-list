@@ -75,4 +75,57 @@
       </div>
     </form>
   </dialog>
+
+  <dialog id="add-task-dialog">
+    <form method="dialog" id="add-task-form" class="task-form">
+      <div class="modal-header">
+        <div>New task</div>
+        <img src="assets/icons/close.svg" alt="close" height="15px" id="add-task-reset-img">
+      </div>
+
+      <label class="modal-label">
+        <span>Title:</span>
+        <input class="form-input" id="add-task-name" maxlength="30" required>
+      </label>
+      <label class="modal-label">
+        <span>Description:</span>
+        <input class="form-input" id="add-task-description" maxlength="20">
+      </label>
+      <label class="modal-label">
+        <span>Task deadline:</span>
+        <input class="form-input" id="add-task-deadline" type="date" maxlength="20">
+      </label>
+
+      <div id="add-task-priority-options" class="modal-label">
+        <span>Task priority:</span>
+        <label>
+          <input name="priority" type="radio" maxlength="20">
+          <span style="color: var(--priority-color-high); font-weight: bold;">High</span>
+        </label>
+        <label>
+          <input name="priority" type="radio" maxlength="20" checked>
+          <span style="color: var(--priority-color-normal); font-weight: bold;">Normal</span>
+        </label>
+        <label>
+          <input name="priority" type="radio" maxlength="20">
+          <span style="color: var(--priority-color-low); font-weight: bold;">Low</span>
+        </label>
+      </div>
+
+      <label class="modal-label">
+        <span>Add to project:</span>
+        <select id="add-task-project" class="form-input">
+          <option></option>
+          <option>Complete TOP</option>
+          <option>New project</option>
+          <option>Touch grass</option>
+        </select>
+      </label>
+
+      <div class="modal-buttons">
+        <button class="modal-add-button" type="submit" id="add-task-add">Add</button>
+        <button class="modal-cancel-button reset-btn" type="reset" id="add-task-reset">Cancel</button>
+      </div>
+    </form>
+  </dialog>
 </html>

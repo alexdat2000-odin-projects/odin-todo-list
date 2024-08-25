@@ -14,4 +14,7 @@ window.onload = () => {
     renameProjectButtonHandlers();
 
     show_tab(0);
+
+    const addTaskDialog = document.querySelector("#add-task-dialog");
+    addTaskDialog.showModal();
 }
