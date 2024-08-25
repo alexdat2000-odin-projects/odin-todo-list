@@ -1,11 +1,29 @@
-
 #footer {
+  grid-area: footer;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   color: white;
   font-size: 18px;
+  font-weight: bold;
   font-family: Roboto, sans-serif;
+
   background: #af7eeb;
-  grid-area: footer;
+}
+
+#github-link {
+  margin-inline: 10px;
+}
+
+#footer-sep {
+  margin-left: 5px;
+  margin-right: 15px;
+  font-size: 30px;
+}
+
+#icons-link {
+  color: white;
+  margin-left: 5px;
 }
