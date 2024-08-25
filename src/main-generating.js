@@ -7,6 +7,7 @@ import edit_icon from './static/icons/edit-icon.svg';
 import delete_icon from './static/icons/trash-icon.png';
 import complete_icon from './static/icons/complete-icon.svg';
 import cross_icon from './static/icons/cross-icon.png';
+import plus_icon from "./static/icons/plus-icon.svg";
 
 
 export function generate_main(title, todos, project_name = "") {
@@ -15,12 +16,16 @@ export function generate_main(title, todos, project_name = "") {
 
     const header = document.createElement("div");
     header.id = "main-header";
-
     const headerText = document.createElement("h1");
     headerText.textContent = title;
     header.appendChild(headerText);
 
     if (project_name !== "") {
+        const addIcon = document.createElement("img");
+        addIcon.src = plus_icon;
+        addIcon.alt = "plus icon";
+        header.appendChild(addIcon);
+
         const editIcon = document.createElement("img");
         editIcon.src = edit_icon;
         editIcon.alt = "edit icon";
@@ -34,8 +39,15 @@ export function generate_main(title, todos, project_name = "") {
                 todo_list.DeleteProject(project_name);
                 show_tab(1);
             }
-        })
+        });
         header.appendChild(deleteIcon);
+    } else {
+        header.appendChild(document.createElement("div"));
+        header.appendChild(document.createElement("div"));
+        const addIcon = document.createElement("img");
+        addIcon.src = plus_icon;
+        addIcon.alt = "plus icon";
+        header.appendChild(addIcon);
     }
     elem.appendChild(header);
 
@@ -105,8 +117,10 @@ export function generate_main(title, todos, project_name = "") {
         deleteIcon.alt = "delete icon";
         deleteIcon.classList.add("task-btn3");
         deleteIcon.addEventListener("click", () => {
-            todo_list.DeleteEntry(todo.id);
-            render();
+            if (window.confirm(`Are you sure you want to delete this task?`)) {
+                todo_list.DeleteEntry(todo.id);
+                render();
+            }
         })
         card.appendChild(deleteIcon);
 
