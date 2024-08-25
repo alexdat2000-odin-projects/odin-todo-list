@@ -16,7 +16,14 @@
   display: flex;
   gap: 25px;
   align-items: center;
-  margin-top: 10px;
+}
+
+#logo-title {
+  margin-top: 12px;
+}
+
+#logo-img {
+  margin-top: 3px;
 }
 
 #header button {
