@@ -34,10 +34,28 @@
     </div>
     <div id="footer">
       Made by Alexdat2000
-      <a href="https://github.com/Alexdat2000" id="github-link"><img src="assets/images/github-mark-white.svg" alt="github"
-                                                                     height="25px"></a>
+      <a href="https://github.com/Alexdat2000" id="github-link"><img src="assets/images/github-mark-white.svg"
+                                                                     alt="github"
+                                                                     height="15px"></a>
       <div id="footer-sep">|</div>
       Icons by <a href="https://icons8.com/" id="icons-link">Icons8</a>
     </div>
   </body>
+
+  <dialog id="new-project-dialog">
+    <form method="dialog" id="new-project-form">
+      <div class="modal-header">
+        <div>New Project</div>
+        <img src="assets/icons/close.svg" alt="close" height="15px" id="add-project-reset-img">
+      </div>
+      <label class="modal-label">
+        <span>Name:</span>
+        <input class="form-input" id="new-project-name" minlength="1" maxlength="30">
+      </label>
+      <div class="modal-buttons">
+        <button class="modal-add-button" type="submit" id="add-project-add">Add</button>
+        <button class="modal-cancel-button reset-btn" type="reset" id="add-project-reset">Cancel</button>
+      </div>
+    </form>
+  </dialog>
 </html>

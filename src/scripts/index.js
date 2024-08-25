@@ -1,8 +1,10 @@
 import "../styles/styles.css"
-import "../styles/style_header.css"
-import "../styles/style_sidebar.css"
-import "../styles/style_main.css"
-import "../styles/style_footer.css"
+import "../styles/header.css"
+import "../styles/sidebar.css"
+import "../styles/main.css"
+import "../styles/footer.css"
+import "../styles/modal.css"
+
 import {todo_list} from "./todo-logic.js";
 import {StorageClear, StorageSetDefault} from "./storage";
 import {show_tab} from "./dom-rendering";
