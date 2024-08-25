@@ -1,5 +1,5 @@
-import {generate_sidebar} from "./sidebar-generating";
-import {generate_main} from "./main-generating";
+import {generate_sidebar} from "./generators/sidebar";
+import {generate_main} from "./generators/main";
 import {PRIORITIES} from "./todo-logic";
 import {todo_list} from "./todo-logic";
 

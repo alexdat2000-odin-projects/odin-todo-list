@@ -51,7 +51,7 @@
 }
 
 .task-completed::after {
-  content: url('./static/icons/tick-icon.svg');
+  content: url('../assets/icons/tick-icon.svg');
   margin-left: 5px;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .task-deadline::before {
-  content: url('./static/icons/alarm-clock-icon.svg');
+  content: url('../assets/icons/alarm-clock-icon.svg');
   margin-right: 5px;
 }
 

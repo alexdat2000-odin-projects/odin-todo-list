@@ -1,13 +1,13 @@
-import {PRIORITIES, STATUSES} from "./todo-logic.js";
-import {show_tab, render} from './dom-rendering'
-import {todo_list} from "./todo-logic.js";
-import {format_date} from "./utils";
+import {PRIORITIES, STATUSES} from "../todo-logic.js";
+import {show_tab, render} from '../dom-rendering'
+import {todo_list} from "../todo-logic.js";
+import {format_date} from "../utils";
 
-import edit_icon from './static/icons/edit-icon.svg';
-import delete_icon from './static/icons/trash-icon.png';
-import complete_icon from './static/icons/complete-icon.svg';
-import cross_icon from './static/icons/cross-icon.png';
-import plus_icon from "./static/icons/plus-icon.svg";
+import edit_icon from '../../assets/icons/edit-icon.svg';
+import delete_icon from '../../assets/icons/trash-icon.png';
+import complete_icon from '../../assets/icons/complete-icon.svg';
+import cross_icon from '../../assets/icons/cross-icon.png';
+import plus_icon from "../../assets/icons/plus-icon.svg";
 
 
 export function generate_main(title, todos, project_name = "") {

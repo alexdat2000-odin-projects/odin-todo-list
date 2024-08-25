@@ -1,14 +1,14 @@
-import {show_tab} from "./dom-rendering";
+import {show_tab} from "../dom-rendering";
 
-import all_icon from './static/icons/all-icon.png';
-import day_icon from './static/icons/day-icon.png';
-import in_progress_icon from './static/icons/in-progress-icon.png';
-import plus_icon from './static/icons/plus-icon.svg';
-import priority_icon_low from './static/icons/priority-icon-low.png';
-import priority_icon_normal from './static/icons/priority-icon-normal.png';
-import priority_icon_high from './static/icons/priority-icon-high.png';
-import project_icon from './static/icons/project-icon.png';
-import week_icon from './static/icons/week-icon.png';
+import all_icon from '../../assets/icons/all-icon.png';
+import day_icon from '../../assets/icons/day-icon.png';
+import in_progress_icon from '../../assets/icons/in-progress-icon.png';
+import plus_icon from '../../assets/icons/plus-icon.svg';
+import priority_icon_low from '../../assets/icons/priority-icon-low.png';
+import priority_icon_normal from '../../assets/icons/priority-icon-normal.png';
+import priority_icon_high from '../../assets/icons/priority-icon-high.png';
+import project_icon from '../../assets/icons/project-icon.png';
+import week_icon from '../../assets/icons/week-icon.png';
 
 
 export function generate_sidebar(todo_list, selected) {
