@@ -29,6 +29,12 @@ export function generate_main(title, todos, project_name = "") {
         const editIcon = document.createElement("img");
         editIcon.src = edit_icon;
         editIcon.alt = "edit icon";
+        editIcon.addEventListener("click", () => {
+            const renameProjectPopUp = document.querySelector("#rename-project-dialog");
+            const renameInput = document.querySelector("#rename-project-name");
+            renameInput.value = project_name;
+            renameProjectPopUp.showModal();
+        });
         header.appendChild(editIcon);
 
         const deleteIcon = document.createElement("img");

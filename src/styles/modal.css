@@ -8,7 +8,7 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#new-project-form {
+.name-project-form {
   width: 550px;
   border: 1px solid #dee2e6;
 

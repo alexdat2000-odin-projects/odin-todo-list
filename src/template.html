@@ -43,9 +43,9 @@
   </body>
 
   <dialog id="new-project-dialog">
-    <form method="dialog" id="new-project-form">
+    <form method="dialog" id="new-project-form" class="name-project-form">
       <div class="modal-header">
-        <div>New Project</div>
+        <div>New project</div>
         <img src="assets/icons/close.svg" alt="close" height="15px" id="add-project-reset-img">
       </div>
       <label class="modal-label">
@@ -55,6 +55,23 @@
       <div class="modal-buttons">
         <button class="modal-add-button" type="submit" id="add-project-add">Add</button>
         <button class="modal-cancel-button reset-btn" type="reset" id="add-project-reset">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="rename-project-dialog">
+    <form method="dialog" id="rename-project-form" class="name-project-form">
+      <div class="modal-header">
+        <div>Rename project</div>
+        <img src="assets/icons/close.svg" alt="close" height="15px" id="rename-project-reset-img">
+      </div>
+      <label class="modal-label">
+        <span>New name:</span>
+        <input class="form-input" id="rename-project-name" maxlength="30" required>
+      </label>
+      <div class="modal-buttons">
+        <button class="modal-add-button" type="submit" id="rename-project-add">Rename</button>
+        <button class="modal-cancel-button reset-btn" type="reset" id="rename-project-reset">Cancel</button>
       </div>
     </form>
   </dialog>

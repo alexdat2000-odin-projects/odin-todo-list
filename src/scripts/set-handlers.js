@@ -1,6 +1,6 @@
 import {StorageClear, StorageSetDefault} from "./storage";
 import {todo_list} from "./todo-logic";
-import {show_tab} from "./dom-rendering";
+import {show_tab, current_tab} from "./dom-rendering";
 
 export function headerButtonHandlers() {
     const resetBtn = document.querySelector("#reset-btn");
@@ -47,6 +47,58 @@ export function addProjectButtonHandlers() {
         }
         e.preventDefault();
         todo_list.AddProject(project_name);
+        show_tab(todo_list.GetProjectId(project_name) + 7);
+        modal.close();
+        form.reset();
+    });
+
+    modal.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        modal.close();
+        form.reset();
+    });
+
+    inpt.addEventListener("input", () => {
+        const project_name = inpt.value;
+        if (todo_list.ProjectExists(project_name)) {
+            inpt.setCustomValidity("Project with this name already exists");
+        } else if (project_name.length < 1) {
+            inpt.setCustomValidity("Project name cannot be empty");
+        } else if (project_name.length > 30) {
+            inpt.setCustomValidity("Project name cannot be longer than 30 characters");
+        } else {
+            inpt.setCustomValidity("");
+        }
+    });
+}
+
+export function renameProjectButtonHandlers() {
+    const modal = document.querySelector("#rename-project-dialog");
+    const form = document.querySelector("#rename-project-form");
+
+    const closeImg = document.querySelector("#rename-project-reset-img");
+    closeImg.addEventListener("click", () => {
+        modal.close();
+        form.reset();
+    });
+
+    const closeBtn = document.querySelector("#rename-project-reset");
+    closeBtn.addEventListener("click", () => {
+        modal.close();
+        form.reset();
+    });
+
+    const addBtn = document.querySelector("#rename-project-add");
+    const inpt = document.querySelector("#rename-project-name");
+    addBtn.addEventListener("click", (e) => {
+        const project_name = inpt.value;
+        if (project_name.length < 1 || project_name.length > 30 || todo_list.ProjectExists(project_name)) {
+            return false;
+        }
+        e.preventDefault();
+
+        const old_name = todo_list.GetProjects()[current_tab - 7];
+        todo_list.RenameProject(old_name, project_name);
         show_tab(todo_list.GetProjectId(project_name) + 7);
         modal.close();
         form.reset();

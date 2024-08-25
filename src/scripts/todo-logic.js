@@ -210,6 +210,21 @@ class TodoList {
     GetProjectId(project) {
         return this.projects.indexOf(project);
     }
+
+    RenameProject(old_name, new_name) {
+        if (!this.projects.includes(old_name)) {
+            console.log(`project ${old_name} not found`);
+            return;
+        }
+        this.projects.splice(this.projects.indexOf(old_name), 1);
+        this.AddProject(new_name);
+        for (let entry of this.todos) {
+            if (entry.project === old_name) {
+                entry.project = new_name;
+            }
+        }
+        this.#UpdateStorage();
+    }
 }
 
 

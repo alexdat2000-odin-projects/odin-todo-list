@@ -3,7 +3,7 @@ import {generate_main} from "./generators/main";
 import {PRIORITIES} from "./todo-logic";
 import {todo_list} from "./todo-logic";
 
-let current_tab = 0;
+export let current_tab = 0;
 
 export function render() {
     const body = document.querySelector("body");
