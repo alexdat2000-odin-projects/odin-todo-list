@@ -1,5 +1,5 @@
 import {PRIORITIES, STATUSES} from "../todo-logic.js";
-import {show_tab, render} from '../dom-rendering'
+import {show_tab, render, prepare_task_modal} from '../dom-rendering'
 import {todo_list} from "../todo-logic.js";
 import {format_date} from "../utils";
 
@@ -24,6 +24,11 @@ export function generate_main(title, todos, project_name = "") {
         const addIcon = document.createElement("img");
         addIcon.src = plus_icon;
         addIcon.alt = "plus icon";
+        addIcon.addEventListener("click", () => {
+            prepare_task_modal(project_name);
+            const addTaskDialog = document.querySelector("#add-task-dialog");
+            addTaskDialog.showModal();
+        });
         header.appendChild(addIcon);
 
         const editIcon = document.createElement("img");
@@ -53,6 +58,11 @@ export function generate_main(title, todos, project_name = "") {
         const addIcon = document.createElement("img");
         addIcon.src = plus_icon;
         addIcon.alt = "plus icon";
+        addIcon.addEventListener("click", () => {
+            prepare_task_modal("");
+            const addTaskDialog = document.querySelector("#add-task-dialog");
+            addTaskDialog.showModal();
+        });
         header.appendChild(addIcon);
     }
     elem.appendChild(header);

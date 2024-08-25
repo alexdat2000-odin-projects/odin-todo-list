@@ -56,3 +56,20 @@ export function show_tab(tab) {
     current_tab = tab;
     render();
 }
+
+export function prepare_task_modal(default_project) {
+    const list = document.querySelector("#add-task-project");
+    while (list.firstChild) {
+        list.removeChild(list.lastChild);
+    }
+
+    const projects = [""].concat(todo_list.GetProjects());
+    for (const project of projects) {
+        const opt = document.createElement("option");
+        opt.textContent = project;
+        if (project === default_project) {
+            opt.selected = true;
+        }
+        list.appendChild(opt);
+    }
+}
