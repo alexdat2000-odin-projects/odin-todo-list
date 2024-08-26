@@ -41,7 +41,7 @@ class TodoEntry {
 
     static comp(lhs, rhs) {  // Sort by date asc, priority desc
         if (lhs.deadline !== rhs.deadline) {
-            return lhs.deadline - rhs.deadline;
+            return (lhs.deadline === -1 ? 10 ** 9 : lhs.deadline) - (rhs.deadline === -1 ? 10 ** 9 : rhs.deadline);
         }
         return rhs.priority - lhs.priority;
     }
@@ -101,6 +101,7 @@ class TodoList {
             return;
         }
         this.todos[index].Update(title, description, priority, deadline, project, status);
+        this.todos.sort(TodoEntry.comp);
         if (project !== "" && !this.projects.includes(project)) {
             this.projects.push(project);
             this.projects.sort();

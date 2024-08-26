@@ -29,7 +29,7 @@ export function setInputValidators() {
     const deadlineInpt = document.querySelector("#add-task-deadline");
     deadlineInpt.addEventListener("input", () => {
         const val = deadlineInpt.value;
-        if (val === 0) {
+        if (val === "") {
             deadlineInpt.setCustomValidity("");
             return;
         }

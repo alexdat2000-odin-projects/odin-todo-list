@@ -1,5 +1,5 @@
 import {PRIORITIES, STATUSES} from "../todo-logic.js";
-import {show_tab, render, prepare_task_modal} from '../dom-rendering'
+import {show_tab, render} from '../dom-rendering'
 import {todo_list} from "../todo-logic.js";
 import {format_date_to_render} from "../utils";
 
@@ -8,7 +8,7 @@ import delete_icon from '../../assets/icons/trash-icon.png';
 import complete_icon from '../../assets/icons/complete-icon.svg';
 import cross_icon from '../../assets/icons/cross-icon.png';
 import plus_icon from "../../assets/icons/plus-icon.svg";
-import {editTaskButtonHandlers} from "../handlers/task";
+import {addTaskButtonHandlers, editTaskButtonHandlers} from "../handlers/task";
 
 
 export function generate_main(title, todos, project_name = "") {
@@ -26,7 +26,7 @@ export function generate_main(title, todos, project_name = "") {
         addIcon.src = plus_icon;
         addIcon.alt = "plus icon";
         addIcon.addEventListener("click", () => {
-            prepare_task_modal(project_name);
+            addTaskButtonHandlers(project_name);
             const addTaskDialog = document.querySelector("#add-task-dialog");
             addTaskDialog.showModal();
         });
@@ -49,7 +49,7 @@ export function generate_main(title, todos, project_name = "") {
         deleteIcon.addEventListener("click", () => {
             if (window.confirm(`Are you sure you want to delete project ${project_name}?`)) {
                 todo_list.DeleteProject(project_name);
-                show_tab(1);
+                show_tab(0);
             }
         });
         header.appendChild(deleteIcon);
@@ -60,7 +60,7 @@ export function generate_main(title, todos, project_name = "") {
         addIcon.src = plus_icon;
         addIcon.alt = "plus icon";
         addIcon.addEventListener("click", () => {
-            prepare_task_modal("");
+            addTaskButtonHandlers("");
             const addTaskDialog = document.querySelector("#add-task-dialog");
             addTaskDialog.showModal();
         });

@@ -3,11 +3,25 @@ import {format_date_to_set_value, MS_IN_DAY} from "../utils";
 import {render} from "../dom-rendering";
 
 
-export function addTaskButtonHandlers() {
+export function addTaskButtonHandlers(default_project) {
     const header = document.querySelector("#add-task-form>.modal-header>div");
     header.textContent = "Add task";
     const oldAddBtn = document.querySelector("#add-task-add");
     oldAddBtn.textContent = "Add";
+
+    const projectInpt = document.querySelector("#add-task-project");
+    while (projectInpt.firstChild) {
+        projectInpt.removeChild(projectInpt.lastChild);
+    }
+    const projects = [""].concat(todo_list.GetProjects());
+    for (const project of projects) {
+        const opt = document.createElement("option");
+        opt.textContent = project;
+        if (project === default_project) {
+            opt.selected = true;
+        }
+        projectInpt.appendChild(opt);
+    }
 
     const modal = document.querySelector("#add-task-dialog");
     const form = document.querySelector("#add-task-form");
@@ -15,7 +29,6 @@ export function addTaskButtonHandlers() {
     const nameInpt = document.querySelector("#add-task-name");
     const descInpt = document.querySelector("#add-task-description");
     const deadlineInpt = document.querySelector("#add-task-deadline");
-    const projectInpt = document.querySelector("#add-task-project");
 
     oldAddBtn.replaceWith(oldAddBtn.cloneNode(true));
     const addBtn = document.querySelector("#add-task-add");
@@ -47,6 +60,17 @@ export function editTaskButtonHandlers(task_id) {
     const oldAddBtn = document.querySelector("#add-task-add");
     oldAddBtn.textContent = "Edit";
 
+    const projectInpt = document.querySelector("#add-task-project");
+    while (projectInpt.firstChild) {
+        projectInpt.removeChild(projectInpt.lastChild);
+    }
+    const projects = [""].concat(todo_list.GetProjects());
+    for (const project of projects) {
+        const opt = document.createElement("option");
+        opt.textContent = project;
+        projectInpt.appendChild(opt);
+    }
+
     const oldTask = todo_list.GetTaskById(task_id);
     const nameInpt = document.querySelector("#add-task-name");
     nameInpt.value = oldTask.title;
@@ -58,7 +82,6 @@ export function editTaskButtonHandlers(task_id) {
         document.querySelector(`#priority-option-${i}`).checked = false;
     }
     document.querySelector(`#priority-option-${oldTask.priority}`).checked = true;
-    const projectInpt = document.querySelector("#add-task-project");
     projectInpt.value = oldTask.project;
 
     const modal = document.querySelector("#add-task-dialog");
