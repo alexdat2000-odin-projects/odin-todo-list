@@ -62,6 +62,7 @@ class TodoList {
     todos = [];
     projects = [];
 
+    // Storing
     constructor() {
         this.Reload();
     }
@@ -82,6 +83,7 @@ class TodoList {
         StorageSet(this.todos, this.projects);
     }
 
+    // Task setters
     AddEntry(title, description, priority, deadline, project, status) {
         this.todos.push(new TodoEntry(title, description, priority, deadline, project, status));
         this.todos.sort(TodoEntry.comp);
@@ -92,25 +94,13 @@ class TodoList {
         this.#UpdateStorage();
     }
 
-    AddProject(project) {
-        if (project !== "" && !this.projects.includes(project)) {
-            this.projects.push(project);
-            this.projects.sort();
-            this.#UpdateStorage();
-        }
-    }
-
-    #GetIndexById(id) {
-        return this.todos.findIndex((element) => element.id === id);
-    }
-
     UpdateEntry(id, title, description, priority, deadline, project, status) {
         const index = this.#GetIndexById(id);
         if (index === -1) {
             console.error(`ID ${id} not found!`);
             return;
         }
-        this.todos[index].update(title, description, priority, deadline, project, status);
+        this.todos[index].Update(title, description, priority, deadline, project, status);
         if (project !== "" && !this.projects.includes(project)) {
             this.projects.push(project);
             this.projects.sort();
@@ -137,6 +127,39 @@ class TodoList {
         this.#UpdateStorage();
     }
 
+    // Task getters
+    #GetIndexById(id) {
+        return this.todos.findIndex((element) => element.id === id);
+    }
+
+    GetTaskById(id) {
+        return this.todos[this.#GetIndexById(id)];
+    }
+
+    // Project setters
+    AddProject(project) {
+        if (project !== "" && !this.projects.includes(project)) {
+            this.projects.push(project);
+            this.projects.sort();
+            this.#UpdateStorage();
+        }
+    }
+
+    RenameProject(old_name, new_name) {
+        if (!this.projects.includes(old_name)) {
+            console.log(`project ${old_name} not found`);
+            return;
+        }
+        this.projects.splice(this.projects.indexOf(old_name), 1);
+        this.AddProject(new_name);
+        for (let entry of this.todos) {
+            if (entry.project === old_name) {
+                entry.project = new_name;
+            }
+        }
+        this.#UpdateStorage();
+    }
+
     DeleteProject(project) {
         const index = this.projects.indexOf(project);
         if (index === -1) {
@@ -148,10 +171,29 @@ class TodoList {
         this.#UpdateStorage();
     }
 
+    // Project getters
+    ProjectExists(project) {
+        return this.projects.includes(project);
+    }
+
+    GetProjectId(project) {
+        return this.projects.indexOf(project);
+    }
+
+    GetProjectTasks(project) {
+        return this.todos.filter((entry) => entry.project === project);
+    }
+
+    // Global getters
     GetAllEntries() {
         return this.todos;
     }
 
+    GetProjects() {
+        return this.projects;
+    }
+
+    // Filters
     FilterInProgress() {
         return this.todos.filter((entry) => entry.status === STATUSES.NOT_COMPLETED);
     }
@@ -160,14 +202,11 @@ class TodoList {
         return this.todos.filter((entry) => !entry.isExpired() && entry.expiresIn() < days);
     }
 
-    FilterByProject(project) {
-        return this.todos.filter((entry) => entry.project === project);
-    }
-
     FilterByPriority(required_statuses) {
         return this.todos.filter((entry) => required_statuses.includes(entry.priority));
     }
 
+    // Get counts
     GetCountsByPriorities() {
         let ans = {
             low: 0,
@@ -197,33 +236,6 @@ class TodoList {
             }
         }
         return projects;
-    }
-
-    GetProjects() {
-        return this.projects;
-    }
-
-    ProjectExists(project) {
-        return this.projects.includes(project);
-    }
-
-    GetProjectId(project) {
-        return this.projects.indexOf(project);
-    }
-
-    RenameProject(old_name, new_name) {
-        if (!this.projects.includes(old_name)) {
-            console.log(`project ${old_name} not found`);
-            return;
-        }
-        this.projects.splice(this.projects.indexOf(old_name), 1);
-        this.AddProject(new_name);
-        for (let entry of this.todos) {
-            if (entry.project === old_name) {
-                entry.project = new_name;
-            }
-        }
-        this.#UpdateStorage();
     }
 }
 

@@ -1,13 +1,14 @@
 import {PRIORITIES, STATUSES} from "../todo-logic.js";
 import {show_tab, render, prepare_task_modal} from '../dom-rendering'
 import {todo_list} from "../todo-logic.js";
-import {format_date} from "../utils";
+import {format_date_to_render} from "../utils";
 
 import edit_icon from '../../assets/icons/edit-icon.svg';
 import delete_icon from '../../assets/icons/trash-icon.png';
 import complete_icon from '../../assets/icons/complete-icon.svg';
 import cross_icon from '../../assets/icons/cross-icon.png';
 import plus_icon from "../../assets/icons/plus-icon.svg";
+import {editTaskButtonHandlers} from "../handlers/task";
 
 
 export function generate_main(title, todos, project_name = "") {
@@ -96,7 +97,7 @@ export function generate_main(title, todos, project_name = "") {
 
         const deadline = document.createElement("div");
         deadline.classList.add("task-deadline");
-        deadline.textContent = format_date(todo.deadline);
+        deadline.textContent = format_date_to_render(todo.deadline);
         if (todo.isExpired() && todo.status === STATUSES.NOT_COMPLETED) {
             deadline.classList.add("expired");
         }
@@ -111,6 +112,11 @@ export function generate_main(title, todos, project_name = "") {
         editIcon.src = edit_icon;
         editIcon.alt = "edit icon";
         editIcon.classList.add("task-btn1");
+        editIcon.addEventListener("click", () => {
+            editTaskButtonHandlers(todo.id);
+            const editTaskDialog = document.querySelector("#add-task-dialog");
+            editTaskDialog.showModal();
+        });
         card.appendChild(editIcon);
 
         const statusIcon = document.createElement("img");
@@ -124,7 +130,7 @@ export function generate_main(title, todos, project_name = "") {
         statusIcon.addEventListener("click", () => {
             todo_list.ToggleEntryStatus(todo.id);
             render();
-        })
+        });
         statusIcon.classList.add("task-btn2");
         card.appendChild(statusIcon);
 

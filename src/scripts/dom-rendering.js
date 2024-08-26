@@ -44,7 +44,7 @@ export function render() {
             new_main = generate_main("Low+ priority", current_todos);
             break;
         default:
-            current_todos = todo_list.FilterByProject(projects[current_tab - 7]);
+            current_todos = todo_list.GetProjectTasks(projects[current_tab - 7]);
             new_main = generate_main(`Project "${projects[current_tab - 7]}"`, current_todos, projects[current_tab - 7]);
             break;
     }
