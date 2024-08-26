@@ -6,18 +6,19 @@ import "../styles/footer.css"
 import "../styles/modal.css"
 
 import {show_tab} from "./dom-rendering";
-import {
-    addProjectButtonHandlers,
-    addTaskButtonHandlers,
-    headerButtonHandlers,
-    renameProjectButtonHandlers
-} from "./set-handlers";
+import {headerButtonHandlers} from "./handlers/header";
+import {addProjectButtonHandlers, renameProjectButtonHandlers} from "./handlers/project";
+import {addTaskButtonHandlers} from "./handlers/task";
+import {setInputValidators} from "./handlers/inputs";
+import {closeButtonsHandlers} from "./handlers/close";
 
 window.onload = () => {
     headerButtonHandlers();
     addProjectButtonHandlers();
     renameProjectButtonHandlers();
     addTaskButtonHandlers();
+    setInputValidators();
+    closeButtonsHandlers();
 
     show_tab(0);
 }
