@@ -21,55 +21,70 @@ export function StorageClear() {
 }
 
 export function StorageSetDefault() {
-    localStorage.projects = JSON.stringify(["Complete TOP", "Touch grass", "New project"]);
+    localStorage.projects = JSON.stringify(["Fullstack Roadmap", "Minecraft Speedrun", "New project"]);
     localStorage.todos = JSON.stringify([{
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
-        "priority": 1,
-        "deadline": get_current_day(),
-        "project": "Complete TOP",
-        "status": 0,
-        "id": "62597696"
-    }, {
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
-        "priority": 0,
-        "deadline": get_current_day() + 1,
-        "project": "Complete TOP",
-        "status": 1,
-        "id": "964691f4"
-    }, {
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
+        "title": "Go for a walk",
+        "description": "",
         "priority": 2,
-        "deadline": get_current_day() + 5,
-        "project": "Complete TOP",
-        "status": 0,
-        "id": "a3e2fa27"
-    }, {
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
-        "priority": 1,
-        "deadline": get_current_day() + 10,
-        "project": "Touch grass",
-        "status": 0,
-        "id": "62597696"
-    }, {
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
-        "priority": 1,
-        "deadline": get_current_day() - 2,
+        "deadline": get_current_day() - 3,
         "project": "",
         "status": 0,
-        "id": "62597696"
+        "id": "1134bf73"
     }, {
-        "title": "JavaScript course",
-        "description": "Complete all content of JavaScript course from TheOdinProject",
+        "title": "Make a to-do list",
+        "description": "Remember to include \"Make a to-do list\" entry",
+        "priority": 1,
+        "deadline": get_current_day() - 1,
+        "project": "Fullstack Roadmap",
+        "status": 1,
+        "id": "d8ea2c87"
+    }, {
+        "title": "Learn 1-cycle",
+        "description": "URGENT!!!!",
+        "priority": 2,
+        "deadline": get_current_day(),
+        "project": "Minecraft Speedrun",
+        "status": 0,
+        "id": "55e231e8"
+    }, {
+        "title": "Finish Javascript course",
+        "description": "",
+        "priority": 1,
+        "deadline": get_current_day() + 3,
+        "project": "Fullstack Roadmap",
+        "status": 0,
+        "id": "f4e00beb"
+    }, {
+        "title": "Make a personal website",
+        "description": "Get a domain",
+        "priority": 0,
+        "deadline": get_current_day() + 5,
+        "project": "Fullstack Roadmap",
+        "status": 0,
+        "id": "8bbd68da"
+    }, {
+        "title": "Kill the Ender Dragon",
+        "description": "",
         "priority": 2,
         "deadline": -1,
-        "project": "Complete TOP",
+        "project": "Minecraft Speedrun",
+        "status": 1,
+        "id": "e7fe8e59"
+    }, {
+        "title": "Get good",
+        "description": "",
+        "priority": 1,
+        "deadline": -1,
+        "project": "Minecraft Speedrun",
         "status": 0,
-        "id": "62597696"
-    },
-    ]);
+        "id": "7a017fd4"
+    }, {
+        "title": "Set up multiple instances",
+        "description": "Resetting 9 world at a simultaniously",
+        "priority": 0,
+        "deadline": -1,
+        "project": "Minecraft Speedrun",
+        "status": 0,
+        "id": "2c35f647"
+    }]);
 }
